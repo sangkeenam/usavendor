@@ -10,6 +10,7 @@ import requests
 import time
 import yfinance as yf
 from prophet import Prophet
+from PIL import Image
 
 def main():
 
@@ -17,12 +18,12 @@ def main():
         # fabicon title Wide , normal  layout = 'wide',
         st.set_page_config(page_title='VendorReport', page_icon = 'BuyBeer_128.png', initial_sidebar_state = 'auto')
         button(username="damuljumong", floating=True, width=221)
-
+        image = Image.open('BuyBeer_128.png')
         # Buy Me a Beer HTML 코드
         tossme_button = """        
         <div style="position: absolute; top: 1px; right: 5px;">
             <a href="https://toss.me/damulcandy" target="_blank">
-                <img src="BuyBeer_128.png" alt="insert coin with toss" style="height: auto !important;width: auto !important;" >            
+                <img src=image alt="insert coin with toss" style="height: auto !important;width: auto !important;" >            
             </a>
         </div>
         """
