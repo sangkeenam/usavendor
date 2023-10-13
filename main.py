@@ -141,7 +141,7 @@ def main():
                     # 전일 종가 가져오기
                     previous_close = stock.history(period="1d")["Close"].values[0]
                     st.write(f"Previous Close: ${previous_close}")                    
-=================
+#=================
         st.title('국내 업체 경영현황 보고서')
 
         stock_codes_input = "005930,072130,078000,069410" # 삼성전자 , 유엔젤, 텔코웨어 엔텔스 
