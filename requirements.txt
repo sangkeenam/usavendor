@@ -2,3 +2,5 @@ langchain
 openai
 OpenDartReader
 streamlit-extras
+prophet
+yfinance
