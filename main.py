@@ -17,6 +17,17 @@ def main():
 
         button(username="damuljumong", floating=True, width=221)
 
+        # Buy Me a Beer HTML 코드
+        tossme_button = """        
+        <div style="position: absolute; top: 1px; right: 5px;">
+            <a href="https://toss.me/damulcandy" target="_blank">
+                <img src="https://harlequin-national-unicorn-728.mypinata.cloud/ipfs/Qmb7mjxeuygcMJvL3pNLB2PJa66G86MdCaxGd1CspA68ns/BuymeaBeer_64_rm.png" alt="insert coin" style="height: auto !important;width: auto !important;" >
+            </a>
+        </div>
+        """
+        # Streamlit 앱에 HTML 삽입
+        st.write(tossme_button, unsafe_allow_html=True)
+    
         chat_model = ChatOpenAI()
 
         # api_key = 'API_KEY_DART'
