@@ -15,7 +15,7 @@ def main():
 
     # while True:  # 무한 루프 시작
         # fabicon title Wide , normal
-        st.set_page_config(page_title='VendorReport', layout = 'normal', page_icon = 'BuyBeer_128.png', initial_sidebar_state = 'auto')
+        st.set_page_config(page_title='VendorReport', page_icon = 'BuyBeer_128.png', initial_sidebar_state = 'auto')
         button(username="damuljumong", floating=True, width=221)
 
         # Buy Me a Beer HTML 코드
