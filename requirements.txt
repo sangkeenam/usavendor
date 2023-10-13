@@ -1,0 +1,4 @@
+langchain
+openai
+OpenDartReader
+streamlit-extras
