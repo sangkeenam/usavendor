@@ -23,7 +23,7 @@ def main():
         tossme_button = """        
         <div style="position: absolute; top: 1px; right: 5px;">
             <a href="https://toss.me/damulcandy" target="_blank">
-                <img src="https://i.seadn.io/gcs/files/1c70683d2121d84564860a6c017bf0ad.jpg?auto=format&dpr=1&w=1920" alt="insert coin with toss" style="height: auto !important;width: auto !important;" >            
+                <img src="https://i.seadn.io/gcs/files/1c70683d2121d84564860a6c017bf0ad.jpg?auto=format&dpr=1&w=20" alt="insert coin with toss" style="height: auto !important;width: auto !important;" >            
             </a>
         </div>
         """
