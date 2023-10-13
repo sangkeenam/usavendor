@@ -6,6 +6,10 @@ import OpenDartReader
 
 import pandas as pd
 from streamlit_extras.buy_me_a_coffee import button
+import requests
+import time
+import yfinance as yf
+from prophet import Prophet
 
 def main():
 
