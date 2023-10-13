@@ -20,7 +20,128 @@ def main():
         api_key = st.secrets.get(var_name, None)
         #api_key = os.environ.get(var_name, None)
         dart = OpenDartReader(api_key) 
+    
+        st.title('해외 업체 경영현황 보고서')
+        stock_codes_input = "AAPL,HPE,DOX" # 애플 , HPE, Amdocs 
+        symbol = "AAPL"
 
+        year = 2023
+        vendorinfo_records = []
+
+        stock_codes_input = st.text_input('Vendor Stock Symbol을 입력하세요. 예) 애플 Stock Symbol : AAPL',key='stock_codes_input_2')
+        if stock_codes_input:
+            stock_codes = [code.strip() for code in stock_codes_input.split(',')]
+        if st.button('업체 정보 요청'):
+            with st.spinner('업체 정보 리포트 작성 중...'):
+                for symbol in stock_codes:
+                    # Yahoo Finance에서 주식 정보를 가져옵니다.
+                    stock = yf.Ticker(symbol)
+                    # 기업 정보를 출력합니다.
+                    st.write("---")
+                    # st.write("stock.info all:", stock.info)
+
+                    st.write("Company Name:", stock.info["longName"])
+                    st.write("CEO name:", stock.info["companyOfficers"][0]["name"])
+                    st.write("No of full Time Employees:", stock.info["fullTimeEmployees"])
+                    st.write("Symbol:", stock.info["symbol"])
+                    st.write("Industry:", stock.info["industry"])
+                    st.write("Sector:", stock.info["sector"])
+                    st.write("Website:", stock.info["website"]) # previousClose
+
+                    st.write("Description:", stock.info["longBusinessSummary"])
+
+                    st.write("Current Price:", stock.history(period="1d")["Close"].iloc[0])
+                    # st.write("Previous Close:", stock.history(period="1d")["Close"].iloc[0])
+                    st.write("Previous Close:", stock.info["previousClose"])
+                    st.write("Open Price:", stock.history(period="1d")["Open"].iloc[0])
+                    st.write("Day's Range:", stock.history(period="1d")["Low"].iloc[0], "-", stock.history(period="1d")["High"].iloc[0])
+                    st.write("52 Week Range:", stock.info["dayLow"], "-", stock.info["dayHigh"])
+                    
+                    # 일일 주식 가격 데이터를 가져옵니다.
+                    daily_prices = stock.history(period="1d")
+                    st.write("Daily Stock Prices:",daily_prices)
+
+                    # 초기 스케일 팩터 설정
+                    if 'scale_factor' not in st.session_state:
+                        st.session_state.scale_factor = 2.0
+
+                    # 월간 주식 가격 데이터를 가져옵니다.
+                    monthly_prices = stock.history(period="1mo")
+                    st.write("Monthly Stock Prices:",monthly_prices)             
+
+                    # 스케일 팩터를 사용하여 그래프 스케일 조정
+                    scale_factor = st.slider("그래프 스케일 조정", 0.1, 10.0, st.session_state.scale_factor)
+                    st.session_state.scale_factor = scale_factor  # 스케일 팩터 업데이트
+
+                    # 그래프 스케일 조정
+                    st.line_chart(monthly_prices[["Open", "High", "Low", "Close"]] * scale_factor)
+                    data = monthly_prices
+                    data = data.reset_index()
+                    # 'Date' 열에서 시간대 정보 제거
+                    data['Date'] = pd.to_datetime(data['Date']).dt.tz_localize(None)
+                    data ["ds"] = data["Date"]
+                    data ["y"] = data["Close"]                            
+                    data = data [["ds","y"]]
+                    st.write("monthly_prices Stock Prices:",data)
+                    # model = Prophet()
+                    # 주말을 제외하고 1주일간의 예측을 수행하는 Prophet 모델 생성
+                    model = Prophet(weekly_seasonality=False)
+                    model.add_seasonality(
+                        name='custom_weekly',
+                        period=7,  # 1주일 주기
+                        fourier_order=3,  # 주기성을 고려할 정도 (조절 가능)
+                        prior_scale=0.1  # 하이퍼파라미터 (조절 가능)
+                    )
+                    model.fit(data)
+                    
+                    # future = model.make_future_dataframe(periods=24, freq='H')
+                    # 내일을 예측하려면 1일 (하루)의 미래 데이터프레임 생성
+                    future = model.make_future_dataframe(periods=7, freq='D')
+                    forecast = model.predict(future)
+                    # st.write("Forecast for Tomorrow:", forecast)
+                    fig1 = model.plot(forecast)
+                    # 실제 값 가져오기 (예제에서는 monthly_prices를 사용)
+                    actual_data = data[['ds', 'y']]
+                    # 실제 값 그래프에 추가
+                    fig1.gca().plot(actual_data['ds'], actual_data['y'], 'r.', label='Actual')
+
+                    # 그래프에 레전드 추가
+                    fig1.gca().legend(["Prophet Forecast", "Actual"])
+
+                    st.pyplot(fig1)
+                    # 'ds'와 'yhat' 열의 이름 변경
+                    forecast.rename(columns={'ds': 'Date', 'yhat': 'Close'}, inplace=True)
+
+                    # 변경된 DataFrame 출력
+                    st.write("Forecast for Tomorrow:", forecast[['Date', 'Close']].tail(4))
+
+                    # 분기별 재무 정보 가져오기
+                    quarterly_financials = stock.quarterly_financials
+                    st.write("Quarterly Financial Statements:", quarterly_financials)
+
+                    # Yahoo Finance에서 재무 정보를 가져옵니다.
+                    financials = stock.financials
+                    st.write("Financial Statements:",financials)
+                    # P/E 비율 가져오기
+                    pe_ratio = stock.info["trailingPE"]
+                    st.write(f"P/E Ratio: {pe_ratio}")
+
+                    # 배당 수익률 가져오기
+                    dividend_yield = stock.info["trailingAnnualDividendYield"]
+                    st.write(f"Dividend Yield: {dividend_yield * 100}%")
+
+                    # # 주식의 52주 범위 가져오기
+                    # fifty_two_week_range = stock.info["fiftyTwoWeekRange"]
+                    # print(f"52-Week Range: {fifty_two_week_range}")
+
+                    # 시가총액 가져오기
+                    market_cap = stock.info["marketCap"]
+                    st.write(f"Market Cap: ${market_cap / 10**9}B")
+
+                    # 전일 종가 가져오기
+                    previous_close = stock.history(period="1d")["Close"].values[0]
+                    st.write(f"Previous Close: ${previous_close}")                    
+=================
         st.title('국내 업체 경영현황 보고서')
 
         stock_codes_input = "005930,072130,078000,069410" # 삼성전자 , 유엔젤, 텔코웨어 엔텔스 
