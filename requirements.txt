@@ -3,4 +3,4 @@ openai
 OpenDartReader
 streamlit-extras
 prophet
---upgrade yfinance
+yfinance
