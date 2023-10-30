@@ -3,4 +3,4 @@ openai
 OpenDartReader
 streamlit-extras
 prophet
-pip install --upgrade yfinance
+--upgrade yfinance
