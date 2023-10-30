@@ -53,7 +53,7 @@ def main():
                 for symbol in stock_codes:
                     # Yahoo Finance에서 주식 정보를 가져옵니다.
                     stock = yf.Ticker(symbol)
-                    time.sleep(15)
+                    time.sleep(30)
                     # 기업 정보를 출력합니다.
                     st.write("---")
                     #st.write("stock.info all:", stock)
