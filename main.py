@@ -56,7 +56,7 @@ def main():
                     # 기업 정보를 출력합니다.
                     st.write("---")
                     st.write("stock.info all:", stock)
-                    st.write("stock.info all:", stock.info)
+                    #st.write("stock.info all:", stock.info)
 
                     #st.write("Company Name:", stock.info["longName"])
                     st.write("CEO name:", stock.info["companyOfficers"][0]["name"])
