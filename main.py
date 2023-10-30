@@ -52,8 +52,13 @@ def main():
             with st.spinner('업체 정보 리포트 작성 중...'):
                 for symbol in stock_codes:
                     # Yahoo Finance에서 주식 정보를 가져옵니다.
-                    stock = yf.Ticker(symbol)
-                    time.sleep(3)
+                    try:
+                        stock = yf.Ticker(symbol)
+                        time.sleep(3)
+                    except HTTPError as e:
+                        print(f"HTTPError 발생: {e}")
+                    except Exception as e:
+                        print(f" 기타 예외 발생: {e}")
                     # 기업 정보를 출력합니다.
                     st.write("---")
                     #st.write("stock.info all:", stock)
