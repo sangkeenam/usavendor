@@ -55,10 +55,10 @@ def main():
                     stock = yf.Ticker(symbol)
                     # 기업 정보를 출력합니다.
                     st.write("---")
-                    st.write("stock.info all:", stock)
+                    #st.write("stock.info all:", stock)
                     #st.write("stock.info all:", stock.info)
 
-                    #st.write("Company Name:", stock.info["longName"])
+                    st.write("Company Name:", stock.info["longName"])
                     st.write("CEO name:", stock.info["companyOfficers"][0]["name"])
                     st.write("No of full Time Employees:", stock.info["fullTimeEmployees"])
                     st.write("Symbol:", stock.info["symbol"])
