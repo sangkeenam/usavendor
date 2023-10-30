@@ -63,7 +63,11 @@ def main():
                     st.write("---")
                     #st.write("stock.info all:", stock)
                     #st.write("stock.info all:", stock.info)
-
+                    try:
+                        st.write("Company Name:", stock.info["longName"])
+                        time.sleep(3)
+                    except:
+                        st.write(f"write error: {e}")
                     st.write("Company Name:", stock.info["longName"])
                     st.write("CEO name:", stock.info["companyOfficers"][0]["name"])
                     st.write("No of full Time Employees:", stock.info["fullTimeEmployees"])
