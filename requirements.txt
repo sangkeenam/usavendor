@@ -3,4 +3,4 @@ openai
 OpenDartReader
 streamlit-extras
 prophet
-yfinance
+yfinance==0.2.31
