@@ -67,7 +67,7 @@ def main():
                         st.write("Company Name:", stock.info["longName"])
                         time.sleep(3)
                     except:
-                        st.write(f"write error: {e}")
+                        st.write(f"write error: ")
                     st.write("Company Name:", stock.info["longName"])
                     st.write("CEO name:", stock.info["companyOfficers"][0]["name"])
                     st.write("No of full Time Employees:", stock.info["fullTimeEmployees"])
