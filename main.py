@@ -66,9 +66,12 @@ def main():
                     st.write("---")
                     #st.write("stock.info all:", stock)
                     #st.write("stock.info all:", stock.info)
-                    valid_market_keys = search_key_by_keyword(stock.info, "market")
-                    print(valid_market_keys)
-                    st.write(valid_market_keys)
+                    try: 
+                        valid_market_keys = search_key_by_keyword(stock.info, "market")
+                        print(valid_market_keys)
+                        st.write(valid_market_keys)
+                    except: st.write(f"search_key_by_keyword: error ")
+                        
                     try: st.write("Company Name:", stock.info["longName"])
                     except: st.write(f"Company Name: error ")
                     
