@@ -168,34 +168,40 @@ def main():
                     forecast.rename(columns={'ds': 'Date', 'yhat': 'Close'}, inplace=True)
 
                     # 변경된 DataFrame 출력
-                    st.write("Forecast for Tomorrow:", forecast[['Date', 'Close']].tail(4))
-
+                    try: st.write("Forecast for Tomorrow:", forecast[['Date', 'Close']].tail(4))
+                    except: st.write(f"Forecast for Tomorrow: error ")
                     # 분기별 재무 정보 가져오기
                     quarterly_financials = stock.quarterly_financials
-                    st.write("Quarterly Financial Statements:", quarterly_financials)
-
+                    try: st.write("Quarterly Financial Statements:", quarterly_financials)
+                    except: st.write(f"Quarterly Financial Statements: error ")
+                        
                     # Yahoo Finance에서 재무 정보를 가져옵니다.
                     financials = stock.financials
-                    st.write("Financial Statements:",financials)
+                    try: st.write("Financial Statements:",financials)
+                    except: st.write(f"Financial Statements: error ")                        
                     # P/E 비율 가져오기
                     pe_ratio = stock.info["trailingPE"]
-                    st.write(f"P/E Ratio: {pe_ratio}")
-
+                    try: st.write(f"P/E Ratio: {pe_ratio}")
+                    except: st.write(f"P/E Ratio: error ")   
+                    
                     # 배당 수익률 가져오기
                     dividend_yield = stock.info["trailingAnnualDividendYield"]
-                    st.write(f"Dividend Yield: {dividend_yield * 100}%")
-
+                    try: st.write(f"Dividend Yield: {dividend_yield * 100}%")
+                    except: st.write(f"Dividend Yield: error ")   
+                    
                     # # 주식의 52주 범위 가져오기
                     # fifty_two_week_range = stock.info["fiftyTwoWeekRange"]
                     # print(f"52-Week Range: {fifty_two_week_range}")
 
                     # 시가총액 가져오기
                     market_cap = stock.info["marketCap"]
-                    st.write(f"Market Cap: ${market_cap / 10**9}B")
-
+                    try: st.write(f"Market Cap: ${market_cap / 10**9}B")
+                    except: st.write(f"Market Cap: error ") 
+                    
                     # 전일 종가 가져오기
                     previous_close = stock.history(period="1d")["Close"].values[0]
-                    st.write(f"Previous Close: ${previous_close}")                    
+                    try: st.write(f"Previous Close: ${previous_close}")   
+                    except: st.write(f"Previous Close: error ") 
 #=================
         st.title('국내 업체 경영현황 보고서')
 
