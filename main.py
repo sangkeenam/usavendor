@@ -199,8 +199,8 @@ def main():
                     except: st.write(f"Market Cap: error ") 
                     
                     # 전일 종가 가져오기
-                    #previous_close = stock.history(period="1d")["Close"].values[0]
-                    try: st.write(f"Previous Close: ${stock.history(period="1d")["Close"].values[0]}")   
+                    try: previous_close = stock.history(period="1d")["Close"].values[0]
+                        st.write(f"Previous Close: ${previous_close}")   
                     except: st.write(f"Previous Close: error ") 
 #=================
         st.title('국내 업체 경영현황 보고서')
