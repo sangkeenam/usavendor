@@ -180,13 +180,13 @@ def main():
                     try: st.write("Financial Statements:",financials)
                     except: st.write(f"Financial Statements: error ")                        
                     # P/E 비율 가져오기
-                    pe_ratio = stock.info["trailingPE"]
-                    try: st.write(f"P/E Ratio: {pe_ratio}")
+                    #pe_ratio = stock.info["trailingPE"]
+                    try: st.write(f"P/E Ratio: {stock.info["trailingPE"]}")
                     except: st.write(f"P/E Ratio: error ")   
                     
                     # 배당 수익률 가져오기
-                    dividend_yield = stock.info["trailingAnnualDividendYield"]
-                    try: st.write(f"Dividend Yield: {dividend_yield * 100}%")
+                    #dividend_yield = stock.info["trailingAnnualDividendYield"]
+                    try: st.write(f"Dividend Yield: {stock.info["trailingAnnualDividendYield"] * 100}%")
                     except: st.write(f"Dividend Yield: error ")   
                     
                     # # 주식의 52주 범위 가져오기
@@ -194,13 +194,13 @@ def main():
                     # print(f"52-Week Range: {fifty_two_week_range}")
 
                     # 시가총액 가져오기
-                    market_cap = stock.info["marketCap"]
-                    try: st.write(f"Market Cap: ${market_cap / 10**9}B")
+                    #market_cap = stock.info["marketCap"]
+                    try: st.write(f"Market Cap: ${stock.info["marketCap"] / 10**9}B")
                     except: st.write(f"Market Cap: error ") 
                     
                     # 전일 종가 가져오기
-                    previous_close = stock.history(period="1d")["Close"].values[0]
-                    try: st.write(f"Previous Close: ${previous_close}")   
+                    #previous_close = stock.history(period="1d")["Close"].values[0]
+                    try: st.write(f"Previous Close: ${stock.history(period="1d")["Close"].values[0]}")   
                     except: st.write(f"Previous Close: error ") 
 #=================
         st.title('국내 업체 경영현황 보고서')
