@@ -65,35 +65,64 @@ def main():
                     #st.write("stock.info all:", stock.info)
                     try: st.write("Company Name:", stock.info["longName"])
                     except: st.write(f"Company Name: error ")
+                    
+                    try: st.write("CEO name:", stock.info["companyOfficers"][0]["name"])
+                    except: st.write(f"CEO name: error ")
+                    try: st.write("No of full Time Employees:", stock.info["fullTimeEmployees"])
+                    except: st.write(f"No of full Time Employees: error ")                        
+                    try: st.write("Symbol:", stock.info["symbol"])
+                    except: st.write(f"Symbol: error ")                        
+                    try: st.write("Industry:", stock.info["industry"])
+                    except: st.write(f"Industry: error ")                        
+                    try: st.write("Sector:", stock.info["sector"])
+                    except: st.write(f"Sector: error ")                        
+                    try: st.write("Website:", stock.info["website"]) # previousClose
+                    except: st.write(f"Website: error ")                        
+                    try: st.write("Description:", stock.info["longBusinessSummary"])                        
+                    except: st.write(f"Description: error ")     
+                        
                     #st.write("Company Name:", stock.info["longName"])
-                    st.write("CEO name:", stock.info["companyOfficers"][0]["name"])
-                    st.write("No of full Time Employees:", stock.info["fullTimeEmployees"])
-                    st.write("Symbol:", stock.info["symbol"])
-                    st.write("Industry:", stock.info["industry"])
-                    st.write("Sector:", stock.info["sector"])
-                    st.write("Website:", stock.info["website"]) # previousClose
+                    #st.write("CEO name:", stock.info["companyOfficers"][0]["name"])
+                    #st.write("No of full Time Employees:", stock.info["fullTimeEmployees"])
+                    #st.write("Symbol:", stock.info["symbol"])
+                    #st.write("Industry:", stock.info["industry"])
+                    #st.write("Sector:", stock.info["sector"])
+                    #st.write("Website:", stock.info["website"]) # previousClose
+                    #st.write("Description:", stock.info["longBusinessSummary"])
 
-                    st.write("Description:", stock.info["longBusinessSummary"])
+                    try: st.write("Current Price:", stock.history(period="1d")["Close"].iloc[0])
+                    except: st.write(f"Current Price: error ")                        
+                    #st.write("Current Price:", stock.history(period="1d")["Close"].iloc[0])
+                    
+                    try: st.write("Previous Close:", stock.info["previousClose"])
+                    except: st.write(f"Previous Close: error ")   
+                    #st.write("Previous Close:", stock.info["previousClose"])
 
-                    st.write("Current Price:", stock.history(period="1d")["Close"].iloc[0])
-                    # st.write("Previous Close:", stock.history(period="1d")["Close"].iloc[0])
-                    st.write("Previous Close:", stock.info["previousClose"])
-                    st.write("Open Price:", stock.history(period="1d")["Open"].iloc[0])
-                    st.write("Day's Range:", stock.history(period="1d")["Low"].iloc[0], "-", stock.history(period="1d")["High"].iloc[0])
-                    st.write("52 Week Range:", stock.info["dayLow"], "-", stock.info["dayHigh"])
+                    try: st.write("Open Price:", stock.history(period="1d")["Open"].iloc[0])
+                    except: st.write(f"Open Price: error ")                        
+                    try: st.write("Day's Range:", stock.history(period="1d")["Low"].iloc[0], "-", stock.history(period="1d")["High"].iloc[0])
+                    except: st.write(f"Day's Range: error ") 
+                    try: st.write("52 Week Range:", stock.info["dayLow"], "-", stock.info["dayHigh"])
+                    except: st.write(f"52 Week Range: error ") 
+                         
+                    #st.write("Open Price:", stock.history(period="1d")["Open"].iloc[0])
+                    #st.write("Day's Range:", stock.history(period="1d")["Low"].iloc[0], "-", stock.history(period="1d")["High"].iloc[0])
+                    #st.write("52 Week Range:", stock.info["dayLow"], "-", stock.info["dayHigh"])
                     
                     # 일일 주식 가격 데이터를 가져옵니다.
                     daily_prices = stock.history(period="1d")
-                    st.write("Daily Stock Prices:",daily_prices)
-
+                    try: st.write("Daily Stock Prices:",daily_prices)
+                    except: st.write(f"Daily Stock Prices: error ") 
+                        
                     # 초기 스케일 팩터 설정
                     if 'scale_factor' not in st.session_state:
                         st.session_state.scale_factor = 1.0
 
                     # 월간 주식 가격 데이터를 가져옵니다.
                     monthly_prices = stock.history(period="1mo")
-                    st.write("Monthly Stock Prices:",monthly_prices)             
-
+                    try: st.write("Monthly Stock Prices:",monthly_prices)             
+                    except: st.write(f"Monthly Stock Prices: error ")
+                        
                     # 스케일 팩터를 사용하여 그래프 스케일 조정
                     scale_factor = st.slider("그래프 스케일 조정", 0.1, 10.0, st.session_state.scale_factor)
                     st.session_state.scale_factor = scale_factor  # 스케일 팩터 업데이트
@@ -107,7 +136,8 @@ def main():
                     data ["ds"] = data["Date"]
                     data ["y"] = data["Close"]                            
                     data = data [["ds","y"]]
-                    st.write("monthly_prices Stock Prices:",data)
+                    try: st.write("monthly_prices Stock Prices:",data)
+                    except: st.write(f"monthly_prices Stock Prices: error ")
                     # model = Prophet()
                     # 주말을 제외하고 1주일간의 예측을 수행하는 Prophet 모델 생성
                     model = Prophet(weekly_seasonality=False)
