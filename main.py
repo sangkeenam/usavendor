@@ -181,7 +181,7 @@ def main():
                     except: st.write(f"Financial Statements: error ")                        
                     # P/E 비율 가져오기
                     try: pe_ratio = stock.info["trailingPE"]
-                        st.write(f"P/E Ratio: {pe_ratio}")
+                            st.write(f"P/E Ratio: {pe_ratio}")
                     except: st.write(f"P/E Ratio: error ")   
                     
                     # 배당 수익률 가져오기
