@@ -70,25 +70,25 @@ def main():
                         valid_market_keys = search_key_by_keyword(stock.info, "market")
                         print(valid_market_keys)
                         st.write(valid_market_keys)
-                    except: st.write(f"search_key_by_keyword: error ")
+                    except: st.write(f"search_key_by_keyword:  ")
                         
                     try: st.write("Company Name:", stock.info["longName"])
-                    except: st.write(f"Company Name: error ")
+                    except: st.write(f"Company Name:  ")
                     
                     try: st.write("CEO name:", stock.info["companyOfficers"][0]["name"])
-                    except: st.write(f"CEO name: error ")
+                    except: st.write(f"CEO name:  ")
                     try: st.write("No of full Time Employees:", stock.info["fullTimeEmployees"])
-                    except: st.write(f"No of full Time Employees: error ")                        
+                    except: st.write(f"No of full Time Employees:  ")                        
                     try: st.write("Symbol:", stock.info["symbol"])
-                    except: st.write(f"Symbol: error ")                        
+                    except: st.write(f"Symbol:  ")                        
                     try: st.write("Industry:", stock.info["industry"])
-                    except: st.write(f"Industry: error ")                        
+                    except: st.write(f"Industry:  ")                        
                     try: st.write("Sector:", stock.info["sector"])
-                    except: st.write(f"Sector: error ")                        
+                    except: st.write(f"Sector:  ")                        
                     try: st.write("Website:", stock.info["website"]) # previousClose
-                    except: st.write(f"Website: error ")                        
+                    except: st.write(f"Website:  ")                        
                     try: st.write("Description:", stock.info["longBusinessSummary"])                        
-                    except: st.write(f"Description: error ")     
+                    except: st.write(f"Description:  ")     
                         
                     #st.write("Company Name:", stock.info["longName"])
                     #st.write("CEO name:", stock.info["companyOfficers"][0]["name"])
@@ -100,19 +100,19 @@ def main():
                     #st.write("Description:", stock.info["longBusinessSummary"])
 
                     try: st.write("Current Price:", stock.history(period="1d")["Close"].iloc[0])
-                    except: st.write(f"Current Price: error ")                        
+                    except: st.write(f"Current Price:  ")                        
                     #st.write("Current Price:", stock.history(period="1d")["Close"].iloc[0])
                     
                     try: st.write("Previous Close:", stock.info["previousClose"])
-                    except: st.write(f"Previous Close: error ")   
+                    except: st.write(f"Previous Close:  ")   
                     #st.write("Previous Close:", stock.info["previousClose"])
 
                     try: st.write("Open Price:", stock.history(period="1d")["Open"].iloc[0])
-                    except: st.write(f"Open Price: error ")                        
+                    except: st.write(f"Open Price:  ")                        
                     try: st.write("Day's Range:", stock.history(period="1d")["Low"].iloc[0], "-", stock.history(period="1d")["High"].iloc[0])
-                    except: st.write(f"Day's Range: error ") 
+                    except: st.write(f"Day's Range:  ") 
                     try: st.write("52 Week Range:", stock.info["dayLow"], "-", stock.info["dayHigh"])
-                    except: st.write(f"52 Week Range: error ") 
+                    except: st.write(f"52 Week Range:  ") 
                          
                     #st.write("Open Price:", stock.history(period="1d")["Open"].iloc[0])
                     #st.write("Day's Range:", stock.history(period="1d")["Low"].iloc[0], "-", stock.history(period="1d")["High"].iloc[0])
@@ -121,7 +121,7 @@ def main():
                     # 일일 주식 가격 데이터를 가져옵니다.
                     daily_prices = stock.history(period="1d")
                     try: st.write("Daily Stock Prices:",daily_prices)
-                    except: st.write(f"Daily Stock Prices: error ") 
+                    except: st.write(f"Daily Stock Prices:  ") 
                         
                     # 초기 스케일 팩터 설정
                     if 'scale_factor' not in st.session_state:
@@ -130,7 +130,7 @@ def main():
                     # 월간 주식 가격 데이터를 가져옵니다.
                     monthly_prices = stock.history(period="1mo")
                     try: st.write("Monthly Stock Prices:",monthly_prices)             
-                    except: st.write(f"Monthly Stock Prices: error ")
+                    except: st.write(f"Monthly Stock Prices:  ")
                         
                     # 스케일 팩터를 사용하여 그래프 스케일 조정
                     scale_factor = st.slider("그래프 스케일 조정", 0.1, 10.0, st.session_state.scale_factor)
@@ -146,7 +146,7 @@ def main():
                     data ["y"] = data["Close"]                            
                     data = data [["ds","y"]]
                     try: st.write("monthly_prices Stock Prices:",data)
-                    except: st.write(f"monthly_prices Stock Prices: error ")
+                    except: st.write(f"monthly_prices Stock Prices:  ")
                     # model = Prophet()
                     # 주말을 제외하고 1주일간의 예측을 수행하는 Prophet 모델 생성
                     model = Prophet(weekly_seasonality=False)
@@ -178,11 +178,11 @@ def main():
 
                     # 변경된 DataFrame 출력
                     try: st.write("Forecast for Tomorrow:", forecast[['Date', 'Close']].tail(4))
-                    except: st.write(f"Forecast for Tomorrow: error ")
+                    except: st.write(f"Forecast for Tomorrow:  ")
                     # 분기별 재무 정보 가져오기
                     quarterly_financials = stock.quarterly_financials
                     try: st.write("Quarterly Financial Statements:", quarterly_financials)
-                    except: st.write(f"Quarterly Financial Statements: error ")
+                    except: st.write(f"Quarterly Financial Statements:  ")
                         
                     # Yahoo Finance에서 재무 정보를 가져옵니다.
                     financials = stock.financials
@@ -192,13 +192,13 @@ def main():
                     try: 
                         pe_ratio = stock.info["trailingPE"]
                         st.write(f"P/E Ratio: {pe_ratio}")
-                    except: st.write(f"P/E Ratio: error ")   
+                    except: st.write(f"P/E Ratio:  ")   
                     
                     # 배당 수익률 가져오기
                     try: 
                         dividend_yield = stock.info["trailingAnnualDividendYield"]
                         st.write(f"Dividend Yield: {dividend_yield * 100}%")
-                    except: st.write(f"Dividend Yield: error ")   
+                    except: st.write(f"Dividend Yield:  ")   
                     
                     # # 주식의 52주 범위 가져오기
                     # fifty_two_week_range = stock.info["fiftyTwoWeekRange"]
@@ -208,13 +208,13 @@ def main():
                     try: 
                         market_cap = stock.info["marketCap"]
                         st.write(f"Market Cap: ${market_cap / 10**9}B")
-                    except: st.write(f"Market Cap: error ") 
+                    except: st.write(f"Market Cap: ") 
                     
                     # 전일 종가 가져오기
                     try: 
                         previous_close = stock.history(period="1d")["Close"].values[0]
                         st.write(f"Previous Close: ${previous_close}")   
-                    except: st.write(f"Previous Close: error ") 
+                    except: st.write(f"Previous Close: ") 
 #=================
         st.title('국내 업체 경영현황 보고서')
 
