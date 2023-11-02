@@ -177,7 +177,7 @@ def main():
                     forecast.rename(columns={'ds': 'Date', 'yhat': 'Close'}, inplace=True)
 
                     # 변경된 DataFrame 출력
-                    try: st.write("Forecast for Tomorrow:", forecast[['Date', 'Close']].tail(4))
+                    try: st.write("Forecast for Tomorrow:", forecast[['Date', 'Close']].tail(5))
                     except: st.write(f"Forecast for Tomorrow:  ")
                     # 분기별 재무 정보 가져오기
                     quarterly_financials = stock.quarterly_financials
