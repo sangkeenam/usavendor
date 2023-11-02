@@ -12,8 +12,8 @@ import yfinance as yf
 from prophet import Prophet
 from PIL import Image
 
-def search_key_by_keyword(data: dict, keyword: str) -> list[str]:
-    return list(filter(lambda x: keyword in x.lower(), data.keys()))
+#def search_key_by_keyword(data: dict, keyword: str) -> list[str]:
+#    return list(filter(lambda x: keyword in x.lower(), data.keys()))
     
 def main():
 
@@ -66,11 +66,11 @@ def main():
                     st.write("---")
                     #st.write("stock.info all:", stock)
                     #st.write("stock.info all:", stock.info)
-                    try: 
-                        valid_market_keys = search_key_by_keyword(stock.info, "market")
-                        print(valid_market_keys)
-                        st.write(valid_market_keys)
-                    except: st.write(f"search_key_by_keyword:  ")
+                    #try: 
+                    #    valid_market_keys = search_key_by_keyword(stock.info, "market")
+                    #    print(valid_market_keys)
+                    #    st.write(valid_market_keys)
+                    #except: st.write(f"search_key_by_keyword:  ")
                         
                     try: st.write("Company Name:", stock.info["longName"])
                     except: st.write(f"Company Name:  ")
