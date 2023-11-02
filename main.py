@@ -124,8 +124,8 @@ def main():
                     except: st.write(f"Daily Stock Prices:  ") 
                         
                     # 초기 스케일 팩터 설정
-                    if 'scale_factor' not in st.session_state:
-                        st.session_state.scale_factor = 1.0
+                    #if 'scale_factor' not in st.session_state:
+                    #    st.session_state.scale_factor = 1.0
 
                     # 월간 주식 가격 데이터를 가져옵니다.
                     monthly_prices = stock.history(period="1mo")
@@ -133,8 +133,8 @@ def main():
                     except: st.write(f"Monthly Stock Prices:  ")
                         
                     # 스케일 팩터를 사용하여 그래프 스케일 조정
-                    scale_factor = st.slider("그래프 스케일 조정", 0.1, 10.0, st.session_state.scale_factor)
-                    st.session_state.scale_factor = scale_factor  # 스케일 팩터 업데이트
+                    #scale_factor = st.slider("그래프 스케일 조정", 0.1, 10.0, st.session_state.scale_factor)
+                    #st.session_state.scale_factor = scale_factor  # 스케일 팩터 업데이트
 
                     # 그래프 스케일 조정
                     st.line_chart(monthly_prices[["Open", "High", "Low", "Close"]])
