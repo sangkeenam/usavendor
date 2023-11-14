@@ -104,7 +104,7 @@ def main():
                     #st.write("Current Price:", stock.history(period="1d")["Close"].iloc[0])
                     
                     try: st.write("Previous Close:", stock.info["previousClose"])
-                    except: st.write(f"Previous Close:  ")   
+                    except: print(f"Previous Close:  ")   
                     #st.write("Previous Close:", stock.info["previousClose"])
 
                     try: st.write("Open Price:", stock.history(period="1d")["Open"].iloc[0])
@@ -112,7 +112,7 @@ def main():
                     try: st.write("Day's Range:", stock.history(period="1d")["Low"].iloc[0], "-", stock.history(period="1d")["High"].iloc[0])
                     except: st.write(f"Day's Range:  ") 
                     try: st.write("52 Week Range:", stock.info["dayLow"], "-", stock.info["dayHigh"])
-                    except: st.write(f"52 Week Range:  ") 
+                    except: print(f"52 Week Range:  ") 
                          
                     #st.write("Open Price:", stock.history(period="1d")["Open"].iloc[0])
                     #st.write("Day's Range:", stock.history(period="1d")["Low"].iloc[0], "-", stock.history(period="1d")["High"].iloc[0])
