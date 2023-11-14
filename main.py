@@ -230,15 +230,14 @@ def main():
         try: 
             stock_codes_input = st.text_input('업체 Stock code를 입력하세요. 예) 삼성전자 Stock code 005930,072130,078000,069410',key='stock_codes_input_1')
         except: 
-            print(f"stock_codes_input: ")
             stock_codes_input = "005930" # 삼성전자
     
         if stock_codes_input:
             stock_codes = [code.strip() for code in stock_codes_input.split(',')]
+            
         try: 
             content = st.text_input('인공지능이 분석할 업체명을 입력하세요. 입력 예) 삼성전자')
          except: 
-            print(f"stock_codes_input: ")
             content = "삼성전자" 
              
         if st.button('업체 분석 요청'):
