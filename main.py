@@ -251,23 +251,29 @@ def main():
             with st.spinner('업체 리포트 작성 중...'):
                 for symbol in stock_codes:
                     # 회사명에  포함된 회사들에 대한 개황정보
-                    vendorInfo = dart.company(symbol)
+                    try: vendorInfo = dart.company(symbol)
+                    except: print("drat company error")    
                     # excel_filename = f'./files/{symbol}_vendorInfo.xlsx'
                     # vendorInfo.to_excel(excel_filename, index=False)             
-                    PeopleInfo = dart.report(symbol, '직원', year - 1)
+                    try: PeopleInfo = dart.report(symbol, '직원', year - 1)
+                    except: print("drat report error")    
                     # excel_filename = f'./files/{symbol}_PeopleInfo.xlsx'
                     # PeopleInfo.to_excel(excel_filename, index=False)     
 
-                    fnInfo = dart.finstate(symbol, year -1,reprt_code ='11011') 
+                    try: fnInfo = dart.finstate(symbol, year -1,reprt_code ='11011') 
+                    except: print("drat finstate error")    
                     # excel_filename = f'./files/{symbol}_fnInfo.xlsx'
                     # fnInfo.to_excel(excel_filename, index=False) 
-                    fnInfo_1Q = dart.finstate(symbol, year,reprt_code ='11013') # 1 분기
+                    try: fnInfo_1Q = dart.finstate(symbol, year,reprt_code ='11013') # 1 분기
+                    except: print("drat finstate error") 
                     # excel_filename = f'./files/{symbol}_fnInfo_1Q.xlsx'
                     # fnInfo_1Q.to_excel(excel_filename, index=False)  
-                    fnInfo_2Q = dart.finstate(symbol, year,reprt_code ='11012') # 2 분기
+                    try: fnInfo_2Q = dart.finstate(symbol, year,reprt_code ='11012') # 2 분기
+                    except: print("drat finstate error") 
                     # excel_filename = f'./files/{symbol}_fnInfo_2Q.xlsx'
                     # fnInfo_2Q.to_excel(excel_filename, index=False)  
-                    fnInfo_3Q = dart.finstate(symbol, year,reprt_code ='11014') # 3 분기
+                    try: fnInfo_3Q = dart.finstate(symbol, year,reprt_code ='11014') # 3 분기
+                    except: print("drat finstate error") 
                     # excel_filename = f'./files/{symbol}_fnInfo_3Q.xlsx'
                     # fnInfo_3Q.to_excel(excel_filename, index=False)
 
