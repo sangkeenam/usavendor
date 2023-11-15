@@ -237,10 +237,15 @@ def main():
             
         try: 
             content = st.text_input('인공지능이 분석할 업체명을 입력하세요. 입력 예) 삼성전자')
+            if stock_codes_input :
+                stock_codes = [code.strip() for code in stock_codes_input.split(',')]
+            elif
+                stock_codes = "005930" # 삼성전자
         except:
             content = "삼성전자" 
             stock_codes_input = "005930" # 삼성전자
             symbol = "005930"
+            stock_codes = "005930"
              
         if st.button('업체 분석 요청'):
             with st.spinner('업체 리포트 작성 중...'):
