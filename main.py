@@ -239,7 +239,7 @@ def main():
             content = st.text_input('인공지능이 분석할 업체명을 입력하세요. 입력 예) 삼성전자')
             if stock_codes_input :
                 stock_codes = [code.strip() for code in stock_codes_input.split(',')]
-            elif
+            elif :
                 stock_codes = "005930" # 삼성전자
         except:
             content = "삼성전자" 
