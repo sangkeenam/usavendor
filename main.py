@@ -149,38 +149,38 @@ def main():
                     except: st.write(f"monthly_prices Stock Prices:  ")
                     # model = Prophet()
                     # 주말을 제외하고 1주일간의 예측을 수행하는 Prophet 모델 생성
-                    model = Prophet(weekly_seasonality=False)
-                    model.add_seasonality(
-                        name='custom_weekly',
-                        period=7,  # 1주일 주기
-                        fourier_order=3,  # 주기성을 고려할 정도 (조절 가능)
-                        prior_scale=0.1  # 하이퍼파라미터 (조절 가능)
-                    )
-                    model.fit(data)
+                    #model = Prophet(weekly_seasonality=False)
+                    #model.add_seasonality(
+                    #    name='custom_weekly',
+                    #    period=7,  # 1주일 주기
+                    #    fourier_order=3,  # 주기성을 고려할 정도 (조절 가능)
+                    #    prior_scale=0.1  # 하이퍼파라미터 (조절 가능)
+                    #)
+                    #model.fit(data)
                     
                     # future = model.make_future_dataframe(periods=24, freq='H')
                     # 내일을 예측하려면 1일 (하루)의 미래 데이터프레임 생성
-                    future = model.make_future_dataframe(periods=7, freq='D')
-                    forecast = model.predict(future)
+                    #future = model.make_future_dataframe(periods=7, freq='D')
+                    #forecast = model.predict(future)
                     # st.write("Forecast for Tomorrow:", forecast)
-                    fig1 = model.plot(forecast)
+                    #fig1 = model.plot(forecast)
                     # 실제 값 가져오기 (예제에서는 monthly_prices를 사용)
-                    actual_data = data[['ds', 'y']]
+                    #actual_data = data[['ds', 'y']]
                     # 실제 값 그래프에 추가
-                    fig1.gca().plot(actual_data['ds'], actual_data['y'], 'r.', label='Actual')
+                    #fig1.gca().plot(actual_data['ds'], actual_data['y'], 'r.', label='Actual')
 
                     # 그래프에 레전드 추가
-                    fig1.gca().legend(["Prophet Forecast", "Actual"])
+                    #fig1.gca().legend(["Prophet Forecast", "Actual"])
 
-                    st.pyplot(fig1)
+                    #st.pyplot(fig1)
                     # 'ds'와 'yhat' 열의 이름 변경
-                    forecast.rename(columns={'ds': 'Date', 'yhat': 'Close'}, inplace=True)
+                    #forecast.rename(columns={'ds': 'Date', 'yhat': 'Close'}, inplace=True)
 
                     # 변경된 DataFrame 출력
                     #try: st.write("Forecast for Tomorrow:", forecast[['Date', 'Close']].tail(1))
                     #except: st.write(f"Forecast for Tomorrow:  ")
-                    try: st.write("Forecast for Future 7days :", forecast[['Date', 'Close']].tail(7))
-                    except: st.write(f"Forecast for Tomorrow:  ")                        
+                    #try: st.write("Forecast for Future 7days :", forecast[['Date', 'Close']].tail(7))
+                    #except: st.write(f"Forecast for Tomorrow:  ")                        
                     # 분기별 재무 정보 가져오기
                     quarterly_financials = stock.quarterly_financials
                     try: st.write("Quarterly Financial Statements:", quarterly_financials)
@@ -235,17 +235,17 @@ def main():
         if stock_codes_input:
             stock_codes = [code.strip() for code in stock_codes_input.split(',')]
             
-        try: 
-            content = st.text_input('인공지능이 분석할 업체명을 입력하세요. 입력 예) 삼성전자')
-            if stock_codes_input :
-                stock_codes = [code.strip() for code in stock_codes_input.split(',')]
-            else :
-                stock_codes = "005930" # 삼성전자
-        except:
-            content = "삼성전자" 
-            stock_codes_input = "005930" # 삼성전자
-            symbol = "005930"
-            stock_codes = "005930"
+        #try: 
+        #    content = st.text_input('인공지능이 분석할 업체명을 입력하세요. 입력 예) 삼성전자')
+        #    if stock_codes_input :
+        #        stock_codes = [code.strip() for code in stock_codes_input.split(',')]
+        #    else :
+        #        stock_codes = "005930" # 삼성전자
+        #except:
+        #    content = "삼성전자" 
+        #    stock_codes_input = "005930" # 삼성전자
+        #    symbol = "005930"
+        #    stock_codes = "005930"
              
         if st.button('업체 분석 요청'):
             with st.spinner('업체 리포트 작성 중...'):
@@ -385,10 +385,10 @@ def main():
                         if not issues.empty:
                             st.write(each_event)
                             st.dataframe(issues, width=1200)
-            st.write("인공지능 ( Open AI )이 분석한 기업 정보를 알려드립니다")
-            result = chat_model.predict(content + "을 분석해줘")    # OpenAI sknam
+            #st.write("인공지능 ( Open AI )이 분석한 기업 정보를 알려드립니다")
+            #result = chat_model.predict(content + "을 분석해줘")    # OpenAI sknam
 
-            st.write(result)
+            #st.write(result)
 
 if __name__ == '__main__':
     main()
