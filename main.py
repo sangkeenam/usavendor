@@ -10,7 +10,7 @@ import requests
 import time
 import yfinance as yf
 from prophet import Prophet
-# from PIL import Image
+from PIL import Image
 
  
 def main():
