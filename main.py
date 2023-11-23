@@ -1,7 +1,7 @@
 import streamlit as st
 from langchain.chat_models import ChatOpenAI
-from langchain.llms import CTransformers
-import os
+#from langchain.llms import CTransformers
+#import os
 import OpenDartReader
 
 import pandas as pd
@@ -10,11 +10,9 @@ import requests
 import time
 import yfinance as yf
 from prophet import Prophet
-from PIL import Image
+# from PIL import Image
 
-#def search_key_by_keyword(data: dict, keyword: str) -> list[str]:
-#    return list(filter(lambda x: keyword in x.lower(), data.keys()))
-    
+ 
 def main():
 
     # while True:  # 무한 루프 시작
@@ -35,9 +33,10 @@ def main():
     
         chat_model = ChatOpenAI()
 
-        # api_key = 'API_KEY_DART'
+
         var_name = "API_KEY_DART"
-        api_key = st.secrets.get(var_name, None)
+        api_key = st.secrets["API_KEY_DART"] #Cloud version
+        #api_key = st.secrets.get(var_name, None) # old
         #api_key = os.environ.get(var_name, None)
         dart = OpenDartReader(api_key) 
     
