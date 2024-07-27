@@ -73,7 +73,7 @@ def main():
                         
                     try: st.write("Company Name:", stock.info["longName"])
                     except:  print(f"Company Name:  ")
-                    
+                    st.write("---")
                     try: st.write("CEO name:", stock.info["companyOfficers"][0]["name"])
                     except:  print(f"CEO name:  ")
                     try: st.write("No of full Time Employees:", stock.info["fullTimeEmployees"])
